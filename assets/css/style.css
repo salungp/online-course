@@ -1,0 +1,51 @@
+.image-upload-wrapper {
+  width: 100px;
+  height: 120px;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-upload-wrapper input {
+  display: none;
+}
+
+.image-upload-wrapper label {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 15px;
+  cursor: pointer;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0,0,0,.2);
+  transition: .2s;
+  border-bottom-left-radius: 5px;
+}
+
+.image-upload-wrapper label:hover {
+  background: rgba(0,0,0,.3);
+}
+
+.comment {
+  display: flex;
+}
+
+.comment-image-wrapper {
+  padding-top: 8px;
+}
+
+.comment-user-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.comment-text {
+  padding-left: 15px;
+}
