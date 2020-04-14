@@ -23,6 +23,10 @@
     <li><a href="<?php echo base_url(); ?>"><i class="fa fa-graduation-cap"></i> <span>KURSUS</span></a></li>
     <li><a href="<?php echo base_url('student'); ?>"><i class="fa fa-users"></i> <span>SISWA</span></a></li>
     <li><a href="<?php echo base_url('activity'); ?>"><i class="fa fa-pencil-square-o"></i> <span>KEGIATAN</span></a></li>
+    <li><a href="<?php echo base_url('invoice'); ?>"><i class="fa fa-money"></i> <span>PEMBAYARAN</span></a></li>
+    <?php if ($user['level'] == 1) : ?>
+    <li><a href="<?php echo base_url('admin'); ?>"><i class="fa fa-user"></i> <span>ADMIN USER</span></a></li>
+    <?php endif; ?>
     <li class="treeview">
       <a href="#"><i class="fa fa-file-text"></i> <span>LAPORAN</span>
         <span class="pull-right-container">

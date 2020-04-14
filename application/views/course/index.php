@@ -92,7 +92,7 @@
 
           <div class="form-group">
             <label for="media">Media</label>
-            <select name="" id="media" class="form-control">
+            <select name="form_media" id="media" class="form-control">
               <option value="">-pilih-</option>
               <option value="upload">Upload</option>
               <option value="link">Link</option>

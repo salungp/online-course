@@ -1,5 +1,7 @@
 <?php
 
+header('X-Frame-Options: SAMEORIGIN');
+
 class Course extends CI_Controller {
   public function __construct() {
     parent::__construct();
@@ -63,11 +65,12 @@ class Course extends CI_Controller {
     $title = htmlspecialchars($this->input->post('title'));
     $description = htmlspecialchars($this->input->post('description'));
     $theme = htmlspecialchars($this->input->post('theme'));
-    $media = htmlspecialchars(@$this->input->post('media'));
+    $media = htmlspecialchars($this->input->post('media'));
     $author = $this->session->userdata('user_logged');
+    $form_media = $this->input->post('form_media');
     $output_media = '';
 
-    if (isset($_FILES)) {
+    if ($form_media == 'upload') {
       $file_name = $_FILES['media']['name'];
       $tmp_name = $_FILES['media']['tmp_name'];
       $file_eks = end(explode('.', $file_name));

@@ -60,3 +60,12 @@ $('.delete-account').on('click', function(e) {
     }
   })
 })
+
+$('.btn-print').on('click', function(e) {
+  e.preventDefault();
+  var body = $('body').html();
+
+  $('body').html($('.box'));
+  window.print();
+  $('body').html(body);
+});

@@ -2,7 +2,7 @@
 <header class="main-header">
 
 <!-- Logo -->
-<a href="index2.html" class="logo">
+<a href="<?php echo base_url(); ?>" class="logo">
   <!-- mini logo for sidebar mini 50x50 pixels -->
   <span class="logo-mini"><b>O</b>CS</span>
   <!-- logo for regular state and mobile devices -->
@@ -59,19 +59,21 @@
         <!-- Menu toggle button -->
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
           <i class="fa fa-bell-o"></i>
-          <span class="label label-warning">10</span>
+          <span class="label label-warning"><?php echo count($notif); ?></span>
         </a>
         <ul class="dropdown-menu">
-          <li class="header">You have 10 notifications</li>
+          <li class="header">You have <?php echo count($notif); ?> notifications</li>
           <li>
             <!-- Inner Menu: contains the notifications -->
             <ul class="menu">
+            <?php foreach($notif as $key) : ?>
               <li><!-- start notification -->
                 <a href="#">
-                  <i class="fa fa-users text-aqua"></i> 5 new members joined today
+                  <i class="fa fa-users text-aqua"></i> <?php echo $key['text']; ?>
                 </a>
               </li>
               <!-- end notification -->
+            <?php endforeach; ?>
             </ul>
           </li>
           <li class="footer"><a href="#">View all</a></li>

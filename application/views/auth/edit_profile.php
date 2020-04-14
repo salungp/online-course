@@ -85,7 +85,7 @@
               <label for="inputPassword4" class="col-sm-2 control-label"></label>
 
               <div class="col-sm-10">
-                <a href="<?php echo base_url('delete_account'); ?>" class="delete-account" style="color: red">Delete account</a>
+                <a href="<?php echo base_url('delete_account'); ?>" onclick="return window.confirm('Yakin mau dihapus?')" style="color: red">Delete account</a>
               </div>
             </div>
           </div>

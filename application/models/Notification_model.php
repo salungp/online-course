@@ -1,7 +1,7 @@
 <?php
 
-class Comment_model extends CI_Model {
-  private $table = 'comments';
+class Notification_model extends CI_Model {
+  private $table = 'notifications';
 
   public function __construct() {
     parent::__construct();
@@ -12,13 +12,14 @@ class Comment_model extends CI_Model {
     return true;
   }
 
-  public function where($key, $val) {
-    $this->db->where($key, $val);
+  public function like($key, $val) {
+    $this->db->like($key, $val);
     return $this;
   }
 
-  public function delete($key, $val) {
-    $this->db->delete($this->table, [$key => $val]);
+  public function where($key, $val) {
+    $this->db->where($key, $val);
+    return $this;
   }
 
   public function orderBy($key, $val) {
@@ -41,5 +42,9 @@ class Comment_model extends CI_Model {
   public function update($data) {
     $this->where('id', $data['id']);
     $this->db->update($this->table, $data);
+  }
+
+  public function delete($key, $val) {
+    $this->db->delete($this->table, [$key => $val]);
   }
 }

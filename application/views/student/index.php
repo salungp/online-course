@@ -50,7 +50,7 @@
                   <td><?php echo $student['name']; ?></td>
                   <td><?php echo $student['address']; ?></td>
                   <td><?php echo $student['email']; ?></td>
-                  <td><span class="badge bg-green">active</span></td>
+                  <td><span class="label label-success">active</span></td>
                   <td><?php echo date('m-d-Y', strtotime($student['created_at'])); ?></td>
                 </tr>
                 <?php endforeach; ?>
