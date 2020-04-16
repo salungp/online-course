@@ -132,7 +132,7 @@
                     ACC
                   </button>
                   <?php else : ?>
-                    <button class="btn btn-success" disabled>Sudah ter<b>ACC</b></button>
+                    <span class="label label-success" disabled>Sudah ter<b>ACC</b></span>
                   <?php endif; ?>
                 </td>
                 <td><?php echo date('d-m-Y'); ?></td>

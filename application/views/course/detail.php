@@ -17,11 +17,11 @@
     <div class="row">
       <div class="col-md-8">
         <div class="box box-solid">
-          <div class="box-header with-border">
-            <h3 class="box-title">Kursus</h3>
-          </div>
           <!-- /.box-header -->
           <div class="box-body">
+            <h2 style="margin-top: 0;"><b><?php echo $course['title']; ?></b></h2>
+
+            <!-- File content -->
             <?php if($course['type'] === 'upload') : ?>
               <?php $file = explode('/', $course['media']); $file = $file[count($file)-1]; ?>
               <?php
@@ -43,26 +43,30 @@
                 </div>
               </div>
             <?php else : ?>
-              <iframe class="img-thumbnail" style="max-width: 400px;" src="<?php echo $course['media']; ?>"></iframe>
+              <a href="<?php echo $course['media']; ?>"><?php echo $course['media']; ?></a>
             <?php endif; ?>
             <dl>
-              <dt>Judul</dt>
-              <dd><?php echo $course['title']; ?></dd>
               <dt>Keterangan</dt>
               <dd><?php echo $course['description']; ?></dd>
               <dt>Tanggal</dt>
               <dd><?php echo date('M, d Y', strtotime($course['created_at'])); ?></dd>
             </dl>
 
-            <h3 style="padding-bottom: 10px;"><b>Komentar</b></h3>
-            <form action="<?php echo base_url('add_comment/'.$course['id']); ?>" method="POST">
-              <div class="input-group">
-                <input type="text" name="comment" placeholder="Tambahkan komentar" class="form-control">
-                <div class="input-group-btn">
-                  <button type="submit" class="btn btn-primary">Comment</button>
-                </div>
+            <h4 style="padding-bottom: 10px;"><b>Komentar</b></h4>
+
+            <!-- Give a width -->
+            <div class="row">
+              <div class="col-md-8">
+                <form action="<?php echo base_url('add_comment/'.$course['id']); ?>" method="POST">
+                  <div class="input-group">
+                    <input type="text" name="comment" placeholder="Tambahkan komentar" class="form-control">
+                    <div class="input-group-btn">
+                      <button type="submit" class="btn btn-default">Comment</button>
+                    </div>
+                  </div>
+                </form>
               </div>
-            </form>
+            </div>
             <br>
 
             <?php $comment = $this->_comment->where('post_id', $course['id'])->getAll(); ?>

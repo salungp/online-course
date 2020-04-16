@@ -5,6 +5,7 @@ class Auth extends CI_Controller {
     parent::__construct();
 
     $this->load->model('User_model', '_user');
+    $this->load->model('Email');
   }
 
   public function loginPage() {
@@ -153,6 +154,23 @@ class Auth extends CI_Controller {
       $this->session->unset_userdata('user_logged');
       $this->session->set_flashdata('message', '<div class="alert alert-success">Selamat tinggal!</div>');
       redirect($this->agent->referrer());
+    }
+  }
+
+  public function sendToken() {
+    $data = [
+      'mailtype' => 'text',
+      'from' => 'salungprastyo99@gmail.com',
+      'begining' => 'Send token',
+      'subject' => 'Test kirim email',
+      'to' => 'salungprastyo@gmail.com',
+      'message' => 'ini tokennya '.md5(uniqid())
+    ];
+
+    if ($this->Email->send($data)) {
+      echo 'Emailnya sudah dikirim kok.';
+    } else {
+      echo 'Maaf terjadi kendala saat pengiriman email.';
     }
   }
 }

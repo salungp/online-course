@@ -56,9 +56,6 @@
               <small><?php echo date('M, d Y', strtotime($course['created_at'])); ?></small>
               <b>Oleh <?php echo $author['name']; ?></b>
             </div>
-            <div class="icon">
-              <i class="ion ion-pie-graph"></i>
-            </div>
             <a href="<?php echo base_url('course/detail/'.$course['slug']); ?>" class="small-box-footer">Lihat kursus <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
