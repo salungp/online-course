@@ -58,10 +58,10 @@
             </div>
 
             <div class="form-group">
-              <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+              <label for="inputEmail3" class="col-sm-2 control-label">Username</label>
 
               <div class="col-sm-10">
-                <input type="email" name="email" class="form-control" id="inputEmail3" value="<?php echo $user['email']; ?>" placeholder="Email">
+                <input type="text" name="email" class="form-control" id="inputEmail3" value="<?php echo $user['email']; ?>" placeholder="Username">
               </div>
             </div>
 

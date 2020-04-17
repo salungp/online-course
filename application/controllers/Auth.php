@@ -12,41 +12,41 @@ class Auth extends CI_Controller {
     $this->load->view('auth/login', ['title' => 'Silahkan login terlebih dahulu.']);
   }
 
-  public function registerPage() {
-    $this->load->view('auth/register', ['title' => 'Daftar untuk memiliki akses kursus.']);
-  }
+  // public function registerPage() {
+  //   $this->load->view('auth/register', ['title' => 'Daftar untuk memiliki akses kursus.']);
+  // }
 
-  public function registerNewUser() {
-    $name = htmlspecialchars($this->input->post('name'));
-    $address = htmlspecialchars($this->input->post('address'));
-    $email = htmlspecialchars($this->input->post('email'));
-    $password = $this->input->post('password');
-    $password_confirm = $this->input->post('password_confirm');
-    $user = $this->_user->where('email', $email)->getSingle();
+  // public function registerNewUser() {
+  //   $name = htmlspecialchars($this->input->post('name'));
+  //   $address = htmlspecialchars($this->input->post('address'));
+  //   $email = htmlspecialchars($this->input->post('email'));
+  //   $password = $this->input->post('password');
+  //   $password_confirm = $this->input->post('password_confirm');
+  //   $user = $this->_user->where('email', $email)->getSingle();
 
-    if ($user) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger">Maaf email sudah.</div>');
-      redirect('register');
-    }
+  //   if ($user) {
+  //     $this->session->set_flashdata('message', '<div class="alert alert-danger">Maaf email sudah.</div>');
+  //     redirect('register');
+  //   }
 
-    if ($password !== $password_confirm) {
-      $this->session->set_flashdata('message', '<div class="alert alert-danger">Password tidak sama.</div>');
-      redirect('register');
-    }
+  //   if ($password !== $password_confirm) {
+  //     $this->session->set_flashdata('message', '<div class="alert alert-danger">Password tidak sama.</div>');
+  //     redirect('register');
+  //   }
 
-    $this->_user->create([
-      'name' => $name,
-      'address' => $address,
-      'email' => $email,
-      'status' => 0,
-      'level' => 3,
-      'profile_picture' => './assets/dist/img/avatar5.png',
-      'password' => password_hash($password, PASSWORD_BCRYPT)
-    ]);
+  //   $this->_user->create([
+  //     'name' => $name,
+  //     'address' => $address,
+  //     'email' => $email,
+  //     'status' => 0,
+  //     'level' => 3,
+  //     'profile_picture' => './assets/dist/img/avatar5.png',
+  //     'password' => password_hash($password, PASSWORD_BCRYPT)
+  //   ]);
 
-    $this->session->set_flashdata('message', '<div class="alert alert-success">Daftar berhasil silahkan login.</div>');
-    redirect('login');
-  }
+  //   $this->session->set_flashdata('message', '<div class="alert alert-success">Daftar berhasil silahkan login.</div>');
+  //   redirect('login');
+  // }
 
   public function loginAction() {
     $email = $this->input->post('email');
@@ -90,9 +90,9 @@ class Auth extends CI_Controller {
     $password = $this->input->post('password');
     $profile_picture = '';
     $password_confirm = $this->input->post('password_confirmation');
-    $user = $this->_user->where('email', $this->session->userdata('user_logged'))->getSingle();
+    $user = $this->_user->where('id', $this->session->userdata('user_logged'))->getSingle();
 
-    if ($_FILES) {
+    if ($_FILES['profile_picture']['name'] != '') {
       $file_name = $_FILES['profile_picture']['name'];
       $ekstensi = end(explode('.', $file_name));
       $open_ekstensi = ['jpg', 'png', 'gif'];
@@ -112,6 +112,8 @@ class Auth extends CI_Controller {
       }
 
       move_uploaded_file($dir_from, $profile_picture);
+    } else {
+      $profile_picture = $user['profile_picture'];
     }
 
     if ($password !== '') {
@@ -120,7 +122,8 @@ class Auth extends CI_Controller {
         redirect($this->agent->referrer());
       }
 
-      $this->_user->create([
+      $this->_user->update([
+        'id' => $this->session->userdata('user_logged'),
         'name' => $name,
         'address' => $address,
         'email' => $email,

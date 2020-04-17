@@ -53,12 +53,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 // Login route
 $route['login'] = 'Auth/loginPage';
 
-// Register route
-$route['register'] = 'Auth/registerPage';
-
-// Register action route
-$route['register_new_user'] = 'Auth/registerNewUser';
-
 // Login action
 $route['authenticate'] = 'Auth/loginAction';
 

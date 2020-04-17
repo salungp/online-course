@@ -42,11 +42,11 @@
               <table class="table table-striped">
                 <tr>
                   <th style="width: 10px;">No</th>
-                  <th style="width: 50px;">Aksi</th>
+                  <th style="width: 80px;">Aksi</th>
                   <th>Nama</th>
                   <th style="width: 80px;">Level</th>
                   <th>Alamat</th>
-                  <th>Email</th>
+                  <th>Username</th>
                 </tr>
                 <?php $i = 1; ?>
                 <?php foreach($users as $key) : ?>
@@ -54,6 +54,9 @@
                   <td><?php echo $i++; ?>.</td>
                   <td>
                     <div class="btn-group">
+                      <a href="<?php echo base_url('admin/edit/'.$key['id']); ?>" class="btn btn-sm btn-primary">
+                        <i class="fa fa-trash"></i>
+                      </a>
                       <a onclick="return window.confirm('Semua data photo profile, komentar dan pembayaran akan dihapus.')" href="<?php echo base_url('admin/delete/'.$key['id']); ?>" class="btn btn-sm btn-danger">
                         <i class="fa fa-trash"></i>
                       </a>
@@ -92,7 +95,6 @@
           <h4 class="modal-title">Tambah user</h4>
         </div>
         <div class="modal-body">
-          <form action=""></form>
           <form action="<?php echo base_url('admin/create'); ?>" method="POST">
             <div class="form-group">
               <label for="name">Nama</label>
@@ -105,8 +107,8 @@
             </div>
 
             <div class="form-group">
-              <label for="email">Email</label>
-              <input type="email" name="email" id="email" class="form-control" placeholder="Masukkan email" required>
+              <label for="username">Username</label>
+              <input type="text" name="username" id="username" class="form-control" placeholder="Masukkan username" required>
             </div>
 
             <div class="form-group">

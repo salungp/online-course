@@ -21,7 +21,7 @@
 
     <form action="<?php echo base_url('authenticate'); ?>" method="post">
       <div class="form-group has-feedback">
-        <input type="email" name="email" class="form-control" placeholder="Email">
+        <input type="text" name="email" class="form-control" placeholder="Username">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
@@ -43,9 +43,6 @@
         <!-- /.col -->
       </div>
     </form>
-
-    <a href="#">I forgot my password</a><br>
-    <a href="<?php echo base_url('register'); ?>" class="text-center">Register a new membership</a>
 
   </div>
   <!-- /.login-box-body -->
