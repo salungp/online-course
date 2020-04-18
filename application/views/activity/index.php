@@ -23,14 +23,15 @@
   <div class="row">
     <div class="col-md-12">
       <!-- The time line -->
+      <?php if (count($activities) > 0) : ?>
       <ul class="timeline">
         <!-- timeline time label -->
         <?php foreach($activities as $key) : ?>
         <?php $course = $this->_course->where('id', $key['course_id'])->getSingle(); ?>
         <li class="time-label">
-              <span class="bg-red">
-                <?php echo date('d, M Y', strtotime($key['date'])); ?>
-              </span>
+          <span class="bg-red">
+            <?php echo date('d, M Y', strtotime($key['date'])); ?>
+          </span>
         </li>
         <!-- /.timeline-label -->
         <!-- timeline item -->
@@ -53,6 +54,9 @@
         <?php endforeach; ?>
         <!-- END timeline item -->
       </ul>
+      <?php else : ?>
+        <p>Tulis kegiatanmu disini.</p>
+      <?php endif; ?>
     </div>
     <!-- /.col -->
   </div>

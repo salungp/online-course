@@ -14,10 +14,6 @@
       apply the skin class to the body tag so the changes take effect. -->
 <link rel="stylesheet" href="<?php echo base_url('assets/'); ?>dist/css/skins/skin-blue.min.css">
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-
-<link rel="stylesheet" href="<?php echo base_url('assets/dist/sweetalert2.min.css'); ?>">
-
 <!-- Additional css -->
 <link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 

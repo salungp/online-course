@@ -36,6 +36,7 @@
       <ul class="treeview-menu">
         <li><a href="<?php echo base_url('laporan/kursus'); ?>">KURSUS</a></li>
         <li><a href="<?php echo base_url('laporan/kegiatan'); ?>">KEGIATAN</a></li>
+        <li><a href="<?php echo base_url('laporan/pembayaran'); ?>">PEMBAYARAN</a></li>
       </ul>
     </li>
   </ul>

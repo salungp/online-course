@@ -55,7 +55,7 @@
                   <td>
                     <div class="btn-group">
                       <a href="<?php echo base_url('admin/edit/'.$key['id']); ?>" class="btn btn-sm btn-primary">
-                        <i class="fa fa-trash"></i>
+                        <i class="fa fa-pencil"></i>
                       </a>
                       <a onclick="return window.confirm('Semua data photo profile, komentar dan pembayaran akan dihapus.')" href="<?php echo base_url('admin/delete/'.$key['id']); ?>" class="btn btn-sm btn-danger">
                         <i class="fa fa-trash"></i>

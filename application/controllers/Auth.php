@@ -163,10 +163,10 @@ class Auth extends CI_Controller {
   public function sendToken() {
     $data = [
       'mailtype' => 'text',
-      'from' => 'salungprastyo99@gmail.com',
+      'from' => 'salungprastyo@gmail.com',
       'begining' => 'Send token',
       'subject' => 'Test kirim email',
-      'to' => 'salungprastyo@gmail.com',
+      'to' => 'salungprastyo99@gmail.com',
       'message' => 'ini tokennya '.md5(uniqid())
     ];
 

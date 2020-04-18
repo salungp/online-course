@@ -8,7 +8,7 @@ $notif = $this->Notification_model->orderBy('id', 'desc')->getAll();
   <!-- Load meta component -->
   <?php $this->load->view('templates/meta'); ?>
   <link rel="stylesheet" href="<?php echo base_url('assets/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css'); ?>">
-  <title>Laporan kursus</title>
+  <title>Laporan pembayaran</title>
 </head>
 <body class="hold-transition skin-blue fixed sidebar-mini">
 <!-- Load navbar component -->
@@ -22,12 +22,12 @@ $notif = $this->Notification_model->orderBy('id', 'desc')->getAll();
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        <b>Laporan kursus</b>
+        <b>Laporan pembayaran</b>
       </h1>
       <ol class="breadcrumb">
         <li><a href="<?php echo base_url(); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
         <li><a href="<?php echo base_url(); ?>">Laporan</a></li>
-        <li class="active">Kursus</li>
+        <li class="active">Pembayaran</li>
       </ol>
     </section>
 
@@ -35,42 +35,54 @@ $notif = $this->Notification_model->orderBy('id', 'desc')->getAll();
     <section class="content container-fluid">
     
     <a href="" class="btn btn-default btn-print"><i class="fa fa-print"></i> Print</a>
-    <a href="<?php echo base_url('laporan/kursus_export_excel'); ?>" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Excel</a>
+    <a href="<?php echo base_url('laporan/pembayaran_export_excel'); ?>" class="btn btn-success"><i class="fa fa-file-excel-o"></i> Excel</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-filter">
+      <i class="fa fa-exchange"></i>
+      Filter
+    </button>
 
     <div style="margin-bottom: 20px;"></div>
-    <div class="row">
+      <div class="row">
         <div class="col-md-8">
           <div class="box table-responsive box-body">
             <!-- /.box-header -->
-            <table id="kursus-table" class="table table-bordered">
+            <table id="invoice-table" class="table table-bordered">
               <thead>
                 <tr>
                   <th style="width: 10px">No</th>
-                  <th>Nama kursus</th>
-                  <th>Pembimbing</th>
-                  <th>Jumlah murid</th>
+                  <th>Nama siswa</th>
+                  <th>Keterangan</th>
+                  <th>Status</th>
+                  <th>Jumlah</th>
                   <th>Tanggal</th>
                 </tr>
               </thead>
               <tbody>
                 <?php $i = 1; ?>
-                <?php foreach($courses as $key) : ?>
-                <?php $author = $this->_user->where('id', $key['author'])->getSingle(); ?>
+                <?php foreach($invoices as $key) : ?>
                 <tr>
                   <td><?php echo $i++; ?>.</td>
+                  <td><?php echo $key['name']; ?></td>
                   <td><?php echo $key['title']; ?></td>
-                  <td><?php echo $author['name']; ?></td>
-                  <td><?php echo $student_total; ?></td>
-                  <td><?php echo date('d-m-Y', strtotime($key['created_at'])); ?></td>
+                  <td>
+                    <?php if($key['status'] == 1) : ?>
+                      <span class="label label-success">Sudah bayar</span>
+                    <?php else : ?>
+                      <span class="label label-danger">Belum bayar</span>
+                    <?php endif; ?>
+                  </td>
+                  <td>Rp.<?php echo number_format($key['total'], 0, ',', '.'); ?></td>
+                  <td><?php echo date('d-m-Y', strtotime($key['date'])); ?></td>
                 </tr>
                 <?php endforeach; ?>
               </tbody>
               <tfoot>
                 <tr>
                   <th style="width: 10px">No</th>
-                  <th>Nama kursus</th>
-                  <th>Pembimbing</th>
-                  <th>Jumlah murid</th>
+                  <th>Nama siswa</th>
+                  <th>Keterangan</th>
+                  <th>Status</th>
+                  <th>Jumlah</th>
                   <th>Tanggal</th>
                 </tr>
               </tfoot>
@@ -84,7 +96,39 @@ $notif = $this->Notification_model->orderBy('id', 'desc')->getAll();
   </div>
   <!-- /.content-wrapper -->
 
-  <!-- Main Footer -->
+<div class="modal fade" id="modal-filter">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Filter data</h4>
+      </div>
+      <div class="modal-body">
+        <form action="<?php echo base_url('laporan/filter'); ?>" method="GET">
+          <input type="hidden" name="data" value="pembayaran">
+          <div class="form-group">
+            <label for="status">Status</label>
+            <select name="status" id="status" class="form-control">
+              <option value="">all</option>
+              <option value="1">Sudah bayar</option>
+              <option value="0">Belum bayar</option>
+            </select>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+<!-- Main Footer -->
 <footer class="main-footer">
     <!-- Default to the left -->
     <strong>Copyright &copy; <?php echo date('Y'); ?> <a href="#">Nothing</a>.</strong> All rights reserved.
@@ -174,7 +218,7 @@ $notif = $this->Notification_model->orderBy('id', 'desc')->getAll();
   <script src="<?php echo base_url('assets/bower_components/datatables.net/js/jquery.dataTables.min.js'); ?>"></script>
   <script>
     $(function() {
-      $('#kursus-table').DataTable()
+      $('#invoice-table').DataTable()
     })
   </script>
   </body>

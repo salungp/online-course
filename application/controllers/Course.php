@@ -1,7 +1,5 @@
 <?php
 
-header('X-Frame-Options: SAMEORIGIN');
-
 class Course extends CI_Controller {
   public function __construct() {
     parent::__construct();
@@ -9,13 +7,24 @@ class Course extends CI_Controller {
       redirect('login');
       exit;
     }
+
+    $this->load->library('pagination');
     $this->load->model('Course_model', '_course');
     $this->load->model('User_model', '_user');
     $this->load->model('Comment_model', '_comment');
   }
 
   public function index() {
-    $courses = $this->_course->orderBy('id', 'desc')->getAll();
+    $course_count = $this->_course->count();
+    $config = [
+      'base_url' => base_url(),
+      'total_rows' => $course_count,
+      'per_page' => 10
+    ];
+    $from = $this->uri->segment(3);
+    $courses = $this->db->order_by('id', 'desc')->get('courses', $config['per_page'], $from)->result_array();
+
+    $this->pagination->initialize($config);
 
     $this->load->view('templates/header', ['title' => 'Student page']);
     $this->load->view('course/index', ['courses' => $courses]);

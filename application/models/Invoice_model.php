@@ -7,6 +7,10 @@ class Invoice_model extends CI_Model {
     parent::__construct();
   }
 
+  public function count() {
+    return $this->get()->num_rows();
+  }
+
   public function create($data) {
     $this->db->insert($this->table, $data);
     return true;

@@ -8,5 +8,3 @@
 <script src="<?php echo base_url('assets/'); ?>dist/js/adminlte.min.js"></script>
 <!-- Additonal js -->
 <script src="<?php echo base_url('assets/js/script.js'); ?>"></script>
-<!-- Sweel -->
-<script src="<?php echo base_url('assets/dist/'); ?>sweetalert2.all.min.js"></script>
