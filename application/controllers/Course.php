@@ -12,9 +12,13 @@ class Course extends CI_Controller {
     $this->load->model('Course_model', '_course');
     $this->load->model('User_model', '_user');
     $this->load->model('Comment_model', '_comment');
+    $this->load->model('Notification_model', '_notification');
   }
 
   public function index() {
+    // clear notification if this notif after one day
+    $this->_notification->clearNotif();
+
     $course_count = $this->_course->count();
     $config = [
       'base_url' => base_url(),

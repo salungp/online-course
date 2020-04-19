@@ -44,6 +44,7 @@
 
   <!-- Main content -->
   <section class="content container-fluid">
+    <?php $user = $this->_user->where('id', $this->session->userdata('user_logged'))->getSingle(); ?>
     <?php if ($user['level'] <= 1) : ?>
     <div class="row">
       <div class="col-md-3">
@@ -93,6 +94,7 @@
             <tbody>
               <?php $i = 1; ?>
               <?php foreach($user_invoice as $k) : ?>
+              <?php $invoice = $this->invoice->where('id', $k['invoice_id'])->getSingle(); ?>
               <?php $siswa = $this->_user->where('id', $k['user_id'])->getSingle(); ?>
               <div class="modal fade" id="modal-<?php echo $k['id']; ?>">
                 <div class="modal-dialog">
@@ -125,7 +127,7 @@
                     <span class="label label-danger">Belum tuntas</span>
                   <?php endif; ?>
                 </td>
-                <td>Rp.530.000</td>
+                <td>Rp.<?php echo number_format($invoice['total'], 0, ',', '.'); ?></td>
                 <td>
                   <?php if($k['status'] == 0) : ?>
                   <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-<?php echo $k['id']; ?>">
@@ -156,17 +158,17 @@
               <form action="<?php echo base_url('invoice/create'); ?>" method="POST">
                 <div class="form-group">
                   <label for="title">Judul</label>
-                  <input type="text" name="title" id="title" class="form-control" placeholder="Masukkan judul">
+                  <input type="text" name="title" id="title" class="form-control" placeholder="Masukkan judul" required>
                 </div>
 
                 <div class="form-group">
                   <label for="date">Tanggal</label>
-                  <input type="date" name="date" id="date" class="form-control">
+                  <input type="date" name="date" id="date" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                   <label for="ammount">Jumlah</label>
-                  <input type="number" name="ammount" id="ammount" class="form-control" placeholder="Masukkan jumlah nominal">
+                  <input type="number" name="ammount" id="ammount" class="form-control" placeholder="Masukkan jumlah nominal" required>
                 </div>
               </div>
               <div class="modal-footer">
@@ -181,21 +183,6 @@
       </div>
       <!-- /.modal -->
     <?php else : ?>
-      <div class="row">
-      <div class="col-md-3">
-        <div class="small-box bg-green">
-          <div class="inner">
-            <h3><sup style="font-size: 20px">Rp.</sup><?php echo number_format($total_ammount, 0, ',', '.'); ?></h3>
-
-            <p>Jumlah menunggak</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-      
     <div class="row">
       <div class="col-md-8">
       <?php echo $this->session->flashdata('message'); ?>
@@ -209,7 +196,6 @@
               <th style="width: 120px;">Pembimbing</th>
               <th style="width: 120px;">Jumlah</th>
               <th style="width: 80px;">Aksi</th>
-              <th style="width: 80px;">Status</th>
               <th style="width: 90px;">Tanggal</th>
             </tr>
           </thead>
@@ -217,7 +203,6 @@
           <?php $i = 1; ?>
           <?php foreach($invoices as $key) : ?>
           <?php $author = $this->_user->where('id', $key['author'])->getSingle(); ?>
-          <?php $user_invoices = $this->db->where('invoice_id', $key['id'])->where('user_id', $this->session->userdata('user_logged'))->get('user_invoices')->row_array(); ?>
             <div class="modal fade" id="modal-<?php echo $key['id']; ?>">
               <div class="modal-dialog">
                 <div class="modal-content">
@@ -244,19 +229,19 @@
               <td><?php echo $key['title']; ?></td>
               <td><?php echo $author['name']; ?></td>
               <td>Rp.<?php echo number_format($key['total'], 2, ',', '.'); ?></td>
+              <?php $check = $this->db->where('invoice_id', $key['id'])->where('user_id', $this->session->userdata('user_logged'))->get('user_invoices')->row_array(); ?>
               <td>
+                <?php if (!$check) : ?>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#modal-<?php echo $key['id']; ?>">
                   ACC
                 </button>
-              </td>
-              <td>
-                <?php if($user_invoices['status'] == 1) { ?>
-                  <span class="badge bg-green">Done</span>
-                <?php } else if ($user_invoices['status'] == 0) { ?>
-                  <span class="badge bg-red">Belum dibayar</span>
-                <?php } else { ?>
-                  <span class="badge bg-red">Belum dibayar</span>
-                <?php } ?>
+                <?php else : ?>
+                  <?php if ($check['status'] == 1) { ?>
+                    <span class="label label-success">Selesai</span>
+                  <?php } else if($check['status'] == 0) { ?>
+                    <span class="label label-warning">Pending</span>
+                  <?php } ?>
+                <?php endif; ?>
               </td>
               <td><?php echo date('d-m-Y', strtotime($key['date'])); ?></td>
             </tr>

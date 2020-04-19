@@ -47,4 +47,28 @@ class Notification_model extends CI_Model {
   public function delete($key, $val) {
     $this->db->delete($this->table, [$key => $val]);
   }
+
+  // clear notification expired
+  public function clearNotif() {
+    // get data
+    $notifications = $this->getAll();
+    $yearNow = date('Y') * 356;
+    $monthNow = date('m') * 31;
+    $dayNow = date('d');
+    $timeNow = $yearNow + $monthNow + $dayNow;
+
+    foreach($notifications as $k) {
+      if ($k['id'] == $k['id']) {
+        $yearEach = date('Y', strtotime($k['created_at'])) * 356;
+        $monthEach = date('m', strtotime($k['created_at'])) * 31;
+        $dayEach = date('d', strtotime($k['created_at']));
+        $timeEach = $yearNow + $monthNow + $dayNow;
+
+        // check if time now more one than timeeach this notification will be deleted
+        if ($timeNow >= $timeEach) {
+          $this->delete('id', $k['id']);
+        }
+      }
+    }
+  }
 }
