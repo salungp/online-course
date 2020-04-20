@@ -12,24 +12,10 @@ class Course extends CI_Controller {
     $this->load->model('Course_model', '_course');
     $this->load->model('User_model', '_user');
     $this->load->model('Comment_model', '_comment');
-    $this->load->model('Notification_model', '_notification');
   }
 
   public function index() {
-    // clear notification if this notif after one day
-    $this->_notification->clearNotif();
-
-    $course_count = $this->_course->count();
-    $config = [
-      'base_url' => base_url(),
-      'total_rows' => $course_count,
-      'per_page' => 10
-    ];
-    $from = $this->uri->segment(3);
-    $courses = $this->db->order_by('id', 'desc')->get('courses', $config['per_page'], $from)->result_array();
-
-    $this->pagination->initialize($config);
-
+    $courses = $this->db->order_by('id', 'desc')->get('courses')->result_array();
     $this->load->view('templates/header', ['title' => 'Student page']);
     $this->load->view('course/index', ['courses' => $courses]);
     $this->load->view('templates/footer');
