@@ -72,4 +72,10 @@ class Invoice extends CI_Controller {
     $this->session->set_flashdata('message', '<div class="alert alert-success">Pembayaran sudah selesai!</div>');
     redirect($this->agent->referrer());
   }
+
+  public function delete($id) {
+    $this->db->delete('user_invoices', ['id' => $id]);
+    $this->session->set_flashdata('message', '<div class="alert alert-success">Pembayaran berhasil dihapus!</div>');
+    redirect($this->agent->referrer());
+  }
 }

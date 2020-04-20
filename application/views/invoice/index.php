@@ -48,9 +48,9 @@
     <?php if ($user['level'] <= 1) : ?>
     <div class="row">
       <div class="col-md-3">
-        <div class="small-box bg-green">
+        <div class="small-box bg-green" style="height: 105px;">
           <div class="inner">
-            <h3><sup style="font-size: 20px">Rp.</sup><?php echo number_format($total_siswa_beyar, 0, ',', '.'); ?></h3>
+            <h3 style="font-size: 26px;"><sup style="font-size: 20px">Rp.</sup><?php echo number_format($total_siswa_beyar, 0, ',', '.'); ?></h3>
 
             <p>Pemasukan</p>
           </div>

@@ -18,32 +18,6 @@
   <!-- Navbar Right Menu -->
   <div class="navbar-custom-menu">
     <ul class="nav navbar-nav">
-      <!-- Notifications Menu -->
-      <li class="dropdown notifications-menu">
-        <!-- Menu toggle button -->
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <i class="fa fa-bell-o"></i>
-          <span class="label label-warning"><?php echo count($notif); ?></span>
-        </a>
-        <ul class="dropdown-menu">
-          <li class="header">You have <?php echo count($notif); ?> notifications</li>
-          <li>
-            <!-- Inner Menu: contains the notifications -->
-            <ul class="menu">
-            <?php foreach($notif as $key) : ?>
-              <li><!-- start notification -->
-                <a href="#">
-                  <i class="fa fa-users text-aqua"></i> <?php echo $key['text']; ?>
-                </a>
-              </li>
-              <!-- end notification -->
-            <?php endforeach; ?>
-            </ul>
-          </li>
-          <li class="footer"><a href="#">View all</a></li>
-        </ul>
-      </li>
-
       <!-- User Account Menu -->
       <li class="dropdown user user-menu">
         <!-- Menu Toggle Button -->
@@ -67,17 +41,13 @@
           <!-- Menu Footer-->
           <li class="user-footer">
             <div class="pull-left">
-              <a href="<?php echo base_url('profile/edit'); ?>" class="btn btn-default btn-flat">Profile</a>
+              <a href="<?php echo base_url('profile/edit'); ?>" class="btn btn-default btn-flat">Profil</a>
             </div>
             <div class="pull-right">
-              <a href="<?php echo base_url('logout'); ?>" class="btn btn-default btn-flat">Sign out</a>
+              <a href="<?php echo base_url('logout'); ?>" class="btn btn-default btn-flat">Keluar</a>
             </div>
           </li>
         </ul>
-      </li>
-      <!-- Control Sidebar Toggle Button -->
-      <li>
-        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
       </li>
     </ul>
   </div>

@@ -66,7 +66,7 @@
             </div>
 
             <div class="form-group">
-              <label for="inputPassword3" class="col-sm-2 control-label">New Password?</label>
+              <label for="inputPassword3" class="col-sm-2 control-label">Password baru?</label>
 
               <div class="col-sm-10">
                 <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
