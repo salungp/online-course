@@ -37,10 +37,15 @@ class Admin extends CI_Controller {
       die;
     }
 
-    unlink($_SERVER['DOCUMENT_ROOT'].$user['media']);
+    
     if ($user) {
-      $this->user->delete('id', $id);
-      $this->_comment->delete('user_id', $id);
+      if ($user['profile_picture'] != './assets/dist/img/avatar5.png') {
+        $clear_url = explode('.', $user['profile_picture']);
+        unlink($_SERVER['DOCUMENT_ROOT'].'/new-project'.$clear_url[1]);
+      }
+
+      $this->user->delete($id);
+      $this->comment->delete('user_id', $id);
       $this->session->set_flashdata('message', '<div class="alert alert-success">Data berhasil dihapus.</div>');
       redirect($this->agent->referrer());
     } else {
